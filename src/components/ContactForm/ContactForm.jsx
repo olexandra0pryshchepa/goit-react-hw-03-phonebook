@@ -10,6 +10,13 @@ export default class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.onAdd(this.state);
+
+     const emptyFields = {
+       name: '',
+       number: '',
+    };
+    
+     this.setState(emptyFields);
   };
 
   handleChange = event => {

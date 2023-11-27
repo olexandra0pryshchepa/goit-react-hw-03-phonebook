@@ -12,6 +12,19 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const stringifiedContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(stringifiedContacts) ?? [];
+    this.setState({ contacts: parsedContacts });
+  };
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      const stringifiedContacts = JSON.stringify(this.state.contacts);
+      localStorage.setItem('contacts', stringifiedContacts);
+    };
+  };
+
   handleAddContact = contactData => {
     const { name, number } = contactData;
     const hasDublicates = this.state.contacts.some(
@@ -55,10 +68,7 @@ export class App extends Component {
     return (
       <div className="phonebook">
         <h1>Phonebook</h1>
-        <ContactForm
-          onAdd={this.handleAddContact}
-          contacts={this.state.contacts}
-        />
+        <ContactForm onAdd={this.handleAddContact} />
         <h2>Contacts</h2>
         <Filter
           filter={this.state.filter}
