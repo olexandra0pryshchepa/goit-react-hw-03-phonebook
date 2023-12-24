@@ -3,7 +3,6 @@ import { ContactItem } from 'components/ContactItem/ContactItem';
 
 export const ContactsList = ({ contacts, handleDeleteContact }) => {
   return (
-    <div>
       <ul>
         {contacts.map(contact => (
           <ContactItem
@@ -13,6 +12,5 @@ export const ContactsList = ({ contacts, handleDeleteContact }) => {
           />
         ))}
       </ul>
-    </div>
   );
 };
